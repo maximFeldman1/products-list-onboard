@@ -6,9 +6,22 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky install",
+    "format": "prettier --write --ignore-unknown .",
+    "lint": "eslint . --fix --ignore-path .gitignore"
+  },
+  "lint-staged": {
+    "*.+(ts|tsx)": [
+      "npm run lint",
+      "npm run format"
+    ],
+    "*.+(json|css|md)": [
+      "npm run format"
+    ]
   },
   "dependencies": {
+    "lint-staged": "^13.1.0",
     "react": "^17.0.2",
     "react-dom": "17.0.2"
   },
@@ -22,7 +35,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.11",
-    "husky": "^8.0.2",
+    "husky": "^8.0.0",
     "prettier": "^2.8.1",
     "typescript": "^4.9.3",
     "vite": "^4.0.0"
