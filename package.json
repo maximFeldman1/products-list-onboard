@@ -7,9 +7,21 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "format": "prettier --write --ignore-unknown .",
+    "lint": "eslint . --fix --ignore-path .gitignore"
+  },
+  "lint-staged": {
+    "*.+(ts|tsx)": [
+      "npm run lint",
+      "npm run format"
+    ],
+    "*.+(json|css|md)": [
+      "npm run format"
+    ]
   },
   "dependencies": {
+    "lint-staged": "^13.1.0",
     "react": "^17.0.2",
     "react-dom": "17.0.2"
   },
