@@ -7,8 +7,8 @@ const Products = lazy(() => import("../../../Pages/Products"));
 const AppRouter = () => (
   <Suspense fallback={<div>Loading...</div>}>
     <Routes>
-      <Route path="/products" element={<Products />} />
-      <Route path={URL.PRODUCTS} element={<Navigate to={URL.PRODUCTS} />} />
+      <Route path={URL.PRODUCTS} element={<Products />} />
+      <Route path="/*" element={<Navigate to={URL.PRODUCTS} />} />
     </Routes>
   </Suspense>
 );
