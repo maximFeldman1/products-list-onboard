@@ -8,10 +8,7 @@ const AppRouter = () => (
   <Suspense fallback={<div>Loading...</div>}>
     <Routes>
       <Route path="/products" element={<Products />} />
-      <Route
-        path={URL.getProducts}
-        element={<Navigate to={URL.getProducts} />}
-      />
+      <Route path={URL.PRODUCTS} element={<Navigate to={URL.PRODUCTS} />} />
     </Routes>
   </Suspense>
 );

@@ -1,3 +1,3 @@
 export const URL = {
-  getProducts: "/products",
+  PRODUCTS: "/products",
 };
