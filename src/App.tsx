@@ -1,12 +1,6 @@
 import React from "react";
 import "./App.css";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./Components/App/AppRouter";
 import { Header } from "./Components/Layout/Header";
