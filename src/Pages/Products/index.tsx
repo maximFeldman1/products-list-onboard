@@ -1,12 +1,19 @@
-import React, { useEffect } from "react";
-import { apiUrl } from "../../shared";
-import { ProductService } from "../../shared/services/product-service";
-import { useQuery } from "react-query";
+import styled from "styled-components";
+import { Action } from "../../components/Actions";
+import ProductList from "../../components/ProductsList";
+
+const Root = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Products = () => {
-  const { data } = useQuery("allProducts", ProductService.getAll);
-
-  return <div>Products</div>;
+  return (
+    <Root>
+      <Action />
+      <ProductList />
+    </Root>
+  );
 };
 
 export default Products;
