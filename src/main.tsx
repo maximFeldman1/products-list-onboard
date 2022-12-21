@@ -1,11 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { worker } from "./ mockServer";
 import App from "./App";
 import "./index.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const createApp = async () => {
+  await worker.start();
+
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
+};
+createApp();
