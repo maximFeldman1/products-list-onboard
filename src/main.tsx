@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { worker } from "./mockServer";
+import { worker } from "./mockserver";
 import App from "./App";
 import "./index.css";
 

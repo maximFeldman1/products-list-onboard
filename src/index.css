@@ -2,3 +2,13 @@
   margin: 0;
   padding: 0;
 }
+
+.ag-header-viewport {
+  display: flex;
+  justify-content: center;
+}
+
+.ag-center-cols-viewport {
+  display: flex;
+  justify-content: center;
+}
