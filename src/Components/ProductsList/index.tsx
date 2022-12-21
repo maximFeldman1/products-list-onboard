@@ -16,6 +16,7 @@ import {
 import { ModuleRegistry } from "@ag-grid-community/core";
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import styled from "styled-components";
+import { columnDefs } from "../../utils";
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
 const Root = styled.div`
@@ -31,13 +32,6 @@ const ProductList = () => {
   );
   const gridStyle = useMemo(() => ({ height: "100vh", width: "100vw" }), []);
 
-  const [columnDefs, setColumnDefs] = useState<ColDef[]>([
-    { headerName: "ID", valueGetter: "node.id" },
-    { field: "name" },
-    { field: "brand" },
-    { field: "price" },
-    { field: "image" },
-  ]);
   const getRowId = useMemo<GetRowIdFunc>(() => {
     return (params: GetRowIdParams) => params.data.id;
   }, []);
