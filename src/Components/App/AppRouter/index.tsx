@@ -15,8 +15,8 @@ const AppRouter = () => (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path={URL.PRODUCTS} element={<Products />} />
+        <Route path={URL.CREATE_PRODUCT} element={<CreateForm />} />
         <Route path="/*" element={<Navigate to={URL.PRODUCTS} />} />
-        <Route path={URL.CREATE} element={<CreateForm />} />
       </Routes>
     </Suspense>
   </Root>

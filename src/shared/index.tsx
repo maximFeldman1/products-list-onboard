@@ -1,6 +1,6 @@
 export const URL = {
   PRODUCTS: "/products",
-  CREATE: "/products/create",
+  CREATE_PRODUCT: "/products/create",
 };
 
 export const apiUrl = () => ({
