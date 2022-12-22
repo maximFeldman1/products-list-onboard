@@ -5,7 +5,7 @@ import { URL } from "../../../shared";
 
 export const CreateProductBtn = () => {
   return (
-    <Link to={URL.CREATE}>
+    <Link to={URL.CREATE_PRODUCT}>
       <i className="pi pi-plus-circle m-2" />
     </Link>
   );
