@@ -1,5 +1,6 @@
 import React from "react";
+import { ProductForm } from "../../components/UI/Forms/ProductForm";
 
 export const CreateForm = () => {
-  return <div>My form </div>;
+  return <ProductForm />;
 };

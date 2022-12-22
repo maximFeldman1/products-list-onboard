@@ -1,10 +1,7 @@
 import { ProductService } from "../../shared/services/product-service";
 import { useQuery } from "react-query";
-import React, { useCallback, useMemo, useRef, useState } from "react";
-import { render } from "react-dom";
+import React, { useMemo } from "react";
 import { AgGridReact } from "@ag-grid-community/react";
-// import "@ag-grid-community/styles/ag-grid.css";
-// import "@ag-grid-community/styles/ag-theme-alpine.css";
 import { GetRowIdFunc, GetRowIdParams } from "@ag-grid-community/core";
 import { ModuleRegistry } from "@ag-grid-community/core";
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
