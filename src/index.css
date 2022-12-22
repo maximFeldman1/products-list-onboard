@@ -2,10 +2,16 @@
   margin: 0;
   padding: 0;
 }
+.ag-header-container {
+  width: -webkit-fill-available !important;
+}
 
 .ag-header-viewport {
   display: flex;
   justify-content: center;
+}
+.ag-center-cols-container {
+  width: 100% !important;
 }
 
 .ag-center-cols-viewport {
