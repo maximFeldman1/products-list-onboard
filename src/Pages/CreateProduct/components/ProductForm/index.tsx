@@ -1,12 +1,12 @@
 import React, { useCallback } from "react";
 import { useFormik } from "formik";
-import { IProduct } from "../../../../models";
+import { ICreateProduct, IProduct } from "../../../../models";
 import { InputText } from "primereact/inputtext";
 import styled from "styled-components";
 import { Button } from "primereact/button";
 import { useMutation } from "react-query";
-import { URL } from "../../../../shared";
-import { ProductService } from "../../../../shared/services/product-service";
+import { URL } from "../../../../constants";
+import { ProductService } from "../../../../services/product-service";
 import { Link } from "react-router-dom";
 import { InputField } from "../../../../components/UI/Forms/InputField";
 import { validationYup } from "../../../../schema/validations/validationSchema";
@@ -18,25 +18,22 @@ const Root = styled.div`
   padding-top: 30px;
 `;
 
-const createProduct = (product: Partial<IProduct>) =>
-  ProductService.createProduct(product as IProduct);
+const createProduct = (product: ICreateProduct) =>
+  ProductService.createProduct(product);
 
 export const ProductForm = () => {
   const { mutate } = useMutation(createProduct, {});
 
-  const handleSubmit = useCallback((data: Partial<IProduct>) => {
+  const handleSubmit = useCallback((data: ICreateProduct) => {
     mutate(data);
   }, []);
 
   const formik = useFormik({
-    initialValues: {
-      name: " ",
-      brand: " ",
-      image: " ",
-    },
+    initialValues: { price: 0, name: " ", brand: " ", image: " " },
     onSubmit: handleSubmit,
     validationSchema: validationYup,
   });
+
   return (
     <Root>
       <form onSubmit={formik.handleSubmit}>
@@ -69,7 +66,6 @@ export const ProductForm = () => {
           errors={formik.errors.brand}
           required
         />
-
         <InputField
           name="image"
           type="text"

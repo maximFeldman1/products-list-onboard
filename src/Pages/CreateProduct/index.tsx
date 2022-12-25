@@ -1,5 +1,4 @@
-import React from "react";
-import { ProductForm } from "./components/ProductForm/index";
+import { ProductForm } from "./components";
 
 export const CreateProduct = () => {
   return <ProductForm />;

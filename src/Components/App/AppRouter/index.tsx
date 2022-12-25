@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import { CreateProduct } from "../../../pages/CreateProduct";
-import { URL } from "../../../shared";
+import { URL } from "../../../constants";
 
 const Products = lazy(() => import("../../../pages/Products"));
 
