@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Action } from "../../components/Actions";
-import ProductList from "../../components/ProductsList";
+import ProductList from "./components/ProductsTable";
 
 const Root = styled.div`
   display: flex;

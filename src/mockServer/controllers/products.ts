@@ -13,7 +13,7 @@ export class ProductController {
       );
     }
   }
-  static async addProduct(
+  static async createProduct(
     req: RestRequest,
     res: ResponseFunction,
     ctx: RestContext

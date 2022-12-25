@@ -1,6 +1,6 @@
 import React from "react";
-import { ProductForm } from "../../components/UI/Forms/ProductForm";
+import { ProductForm } from "./components/ProductForm/index";
 
-export const CreateForm = () => {
+export const CreateProduct = () => {
   return <ProductForm />;
 };

@@ -6,6 +6,6 @@ export const URL = {
 export const apiUrl = () => ({
   products: {
     getAll: "/api/products",
-    add: "/api/products/create",
+    create: "/api/products/create",
   },
 });

@@ -5,3 +5,5 @@ export interface IProduct {
   brand: string;
   image: string;
 }
+
+export type ICreateProduct = Omit<IProduct, "id">;

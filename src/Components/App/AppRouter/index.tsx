@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import styled from "styled-components";
-import { CreateForm } from "../../../pages/CreateProduct";
+import { CreateProduct } from "../../../pages/CreateProduct";
 import { URL } from "../../../shared";
 
 const Products = lazy(() => import("../../../pages/Products"));
@@ -15,7 +15,7 @@ const AppRouter = () => (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path={URL.PRODUCTS} element={<Products />} />
-        <Route path={URL.CREATE_PRODUCT} element={<CreateForm />} />
+        <Route path={URL.CREATE_PRODUCT} element={<CreateProduct />} />
         <Route path="/*" element={<Navigate to={URL.PRODUCTS} />} />
       </Routes>
     </Suspense>

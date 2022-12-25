@@ -1,12 +1,12 @@
 import { apiUrl } from "..";
-import { IProduct } from "../../models";
+import { ICreateProduct, IProduct } from "../../models";
 import Api from "./API";
 
 export class ProductService {
   static getAll() {
     return Api.get(apiUrl().products.getAll);
   }
-  static addProduct(product: IProduct) {
-    return Api.post<IProduct>(apiUrl().products.add, product);
+  static createProduct(newProduct: ICreateProduct) {
+    return Api.post<IProduct>(apiUrl().products.create, newProduct);
   }
 }
