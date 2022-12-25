@@ -10,12 +10,10 @@ export const InputField = ({
   ...defaultProps
 }: any) => {
   return (
-    <>
-      <span className="p-float-label mt-4">
-        <InputText name={name} type={type} value={value} {...defaultProps} />
-        <label htmlFor={name}>{name}</label>
-        {<div>{errors}</div>}
-      </span>
-    </>
+    <span className="p-float-label mt-4">
+      <InputText name={name} type={type} value={value} {...defaultProps} />
+      <label htmlFor={name}>{name}</label>
+      <div>{errors}</div>
+    </span>
   );
 };
