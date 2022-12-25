@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { worker } from "./mockserver";
-import { App } from "./App";
-
+import App from "./App";
 import "./index.css";
 
 const createApp = async () => {
@@ -15,5 +14,4 @@ const createApp = async () => {
     document.getElementById("root")
   );
 };
-
 createApp();

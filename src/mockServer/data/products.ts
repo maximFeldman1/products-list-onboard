@@ -1,5 +1,3 @@
-import { Product } from "../../models";
-
 export const productImages = {
   adidas:
     "https://1000logos.net/wp-content/uploads/2019/06/Adidas-Logo-1991.jpg",
@@ -7,17 +5,17 @@ export const productImages = {
   puma: "https://1000logos.net/wp-content/uploads/2017/05/PUMA-logo.jpg",
 };
 
-export const products: Product[] = [
+export const products = [
   {
     id: "1",
-    price: 100,
+    price: "100",
     name: "Air Force",
     brand: "Nike",
     image: productImages["nike"],
   },
   {
     id: "2",
-    price: 500,
+    price: "500",
     name: "adidas porche",
     brand: "Adidas",
     image: productImages["adidas"],

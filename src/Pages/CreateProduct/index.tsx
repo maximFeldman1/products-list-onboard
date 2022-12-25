@@ -1,5 +1,5 @@
-import { ProductForm } from "./components";
+import React from "react";
 
-export const CreateProduct = () => {
-  return <ProductForm />;
+export const CreateForm = () => {
+  return <div>My form </div>;
 };

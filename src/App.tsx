@@ -7,13 +7,15 @@ import { Header } from "./components/Layout/Header";
 
 const queryClient = new QueryClient();
 
-export const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <Header />
-      <AppRouter />
-    </BrowserRouter>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Header />
+        <AppRouter />
+      </BrowserRouter>
+    </QueryClientProvider>
+  );
+}
 
 export default App;
