@@ -1,7 +1,7 @@
 import React from "react";
 import "primeicons/primeicons.css";
 import { Link } from "react-router-dom";
-import { URL } from "../../../shared";
+import { URL } from "../../../constants";
 
 export const CreateProductBtn = () => {
   return (
