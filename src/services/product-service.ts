@@ -1,3 +1,4 @@
+import { products } from "../mockserver/data/products";
 import { apiUrl } from "../constants";
 import { ICreateProduct, IProduct } from "../models";
 import Api from "./API";
@@ -8,5 +9,16 @@ export class ProductService {
   }
   static createProduct(newProduct: ICreateProduct) {
     return Api.post<IProduct>(apiUrl().products.create, newProduct);
+  }
+  static deleteProduct(id: string) {
+    const product = products.find((p) => p.id === id);
+
+    if (!product) throw new Error("Product not found");
+    products.splice(
+      products.findIndex((p) => p.id === id),
+      1
+    );
+
+    return Api.delete<IProduct>(apiUrl().products.delete, product);
   }
 }

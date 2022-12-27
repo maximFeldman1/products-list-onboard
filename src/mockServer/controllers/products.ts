@@ -1,6 +1,7 @@
 import { RestRequest, RestContext, ResponseFunction } from "msw";
 import { products } from "../data/products";
 import uuid from "react-uuid";
+import { IProduct } from "models";
 
 export class ProductController {
   static getAll(req: RestRequest, res: ResponseFunction, ctx: RestContext) {
@@ -28,6 +29,17 @@ export class ProductController {
         ctx.status(400),
         ctx.json({ message: (err as Error).message })
       );
+    }
+  }
+  static deleteProduct(
+    req: RestRequest<IProduct>,
+    res: ResponseFunction<IProduct>,
+    ctx: RestContext
+  ) {
+    try {
+      return res(ctx.status(200));
+    } catch (err) {
+      ctx.json({ message: (err as Error).message });
     }
   }
 }

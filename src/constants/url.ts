@@ -7,5 +7,6 @@ export const apiUrl = () => ({
   products: {
     getAll: "/api/products",
     create: "/api/products/create",
+    delete: "/api/products",
   },
 });
