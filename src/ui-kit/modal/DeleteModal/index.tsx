@@ -9,18 +9,21 @@ import { useProductContext } from "../../../context/contextProducts";
 interface IProps {
   visible: boolean;
   onCancel: () => void;
+  onDone: () => void;
   productId: string;
 }
 
 const deleteProduct = (id: string) => ProductService.deleteProduct(id);
 
-export const DeleteModal = ({ visible, onCancel, productId }: IProps) => {
+export const DeleteModal = ({
+  visible,
+  onCancel,
+  productId,
+  onDone,
+}: IProps) => {
   const toast = useRef(null);
-  const { products, refetch } = useProductContext();
-  console.log("data get", products);
-
   const { mutate } = useMutation(deleteProduct, {
-    onSuccess: () => refetch(),
+    onSuccess: () => onDone(),
   });
 
   const onHide = useCallback(() => {

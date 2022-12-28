@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Action } from "../../components";
 import { ProductsTable } from "./components";
+import { ProductContextProvider } from "../../context/contextProducts";
 
 const Root = styled.div`
   display: flex;
@@ -8,9 +9,12 @@ const Root = styled.div`
 `;
 
 const Products = () => (
-  <Root>
-    <Action />
-    <ProductsTable />
-  </Root>
+  <ProductContextProvider>
+    <Root>
+      <Action />
+      <ProductsTable />
+    </Root>
+  </ProductContextProvider>
 );
+
 export default Products;

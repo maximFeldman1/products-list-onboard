@@ -5,17 +5,7 @@ import { ProductService } from "../../../../services";
 import { productColumns } from "./productColumns";
 import { ModuleRegistry } from "@ag-grid-community/core";
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
-import {
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
-import {
-  ProductContextProvider,
-  useProductContext,
-} from "../../../../context/contextProducts";
+import { useProductContext } from "../../../../context/contextProducts";
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
@@ -27,13 +17,10 @@ const Root = styled.div`
 
 export const ProductsTable = () => {
   const { products, refetch } = useProductContext();
-  console.log("1", refetch);
-
+  
   return (
-    <ProductContextProvider value={products}>
-      <Root className="ag-theme-alpine">
-        <AgGridReact rowData={products} columnDefs={productColumns} />
-      </Root>
-    </ProductContextProvider>
+    <Root className="ag-theme-alpine">
+      <AgGridReact rowData={products?.data} columnDefs={productColumns} />
+    </Root>
   );
 };

@@ -1,9 +1,8 @@
 import { products } from "../../mockserver/data/products";
-import React, { createContext, useContext } from "react";
+import { createContext, useContext } from "react";
 import { IProduct } from "models";
 import { ProductService } from "../../services/product-service";
 import { useQuery } from "react-query";
-import { AxiosResponse } from "axios";
 
 interface IProps {
   products?: IProduct[];
@@ -17,6 +16,7 @@ export const ProductContextProvider = ({ children }: any) => {
     "getAllProducts",
     ProductService.getAll
   );
+
   const value = { products, refetch };
 
   return (

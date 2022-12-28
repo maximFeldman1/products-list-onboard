@@ -4,10 +4,10 @@ import { ICreateProduct, IProduct } from "../../../../models";
 import { InputText } from "primereact/inputtext";
 import styled from "styled-components";
 import { Button } from "primereact/button";
-import { useMutation, QueryClient } from "react-query";
+import { useMutation } from "react-query";
 import { URL } from "../../../../constants";
 import { ProductService } from "../../../../services/product-service";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { InputField } from "../../../../components/UI/Forms/InputField";
 import { validationYup } from "../../../../schema/validations/validationSchema";
 
@@ -25,12 +25,10 @@ export const ProductForm = () => {
   const navigation = useNavigate();
   const { mutate, isLoading } = useMutation(createProduct, {
     onSuccess: () => navigation(URL.PRODUCTS),
-    // onError
   });
 
   const handleSubmit = useCallback((data: ICreateProduct) => {
     mutate(data);
-    console.log("isLoading", isLoading);
   }, []);
 
   const formik = useFormik({
@@ -38,7 +36,6 @@ export const ProductForm = () => {
     onSubmit: handleSubmit,
     validationSchema: validationYup,
   });
-  console.log(isLoading, "isLoading outside");
 
   return (
     <Root>

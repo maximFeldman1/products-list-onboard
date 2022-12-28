@@ -2,12 +2,14 @@ import { useRef, useState } from "react";
 import { useModal } from "../../ui-kit/modal/";
 import { Menu } from "primereact/menu";
 import { Button } from "primereact/button";
+import { useProductContext } from "../../context/contextProducts";
 
 interface IProps {
   productId: string;
 }
 export const DropdownSelector = ({ productId }: IProps) => {
   const { openModal, closeModal } = useModal();
+  const { refetch } = useProductContext();
   const menu = useRef(null);
 
   const items = [
@@ -25,7 +27,7 @@ export const DropdownSelector = ({ productId }: IProps) => {
           label: "Delete",
           icon: "pi pi-times",
           command: () => {
-            openModal("delete", { productId });
+            openModal("delete", { productId, onDone: refetch });
           },
         },
       ],
