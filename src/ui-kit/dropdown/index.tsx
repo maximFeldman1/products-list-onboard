@@ -18,7 +18,6 @@ export const DropdownSelector = ({ productId }: IProps) => {
           label: "Edit",
           icon: "pi pi-refresh",
           command: () => {
-            // openModal("info", { productId });
             openModal("edit", { productId });
           },
         },

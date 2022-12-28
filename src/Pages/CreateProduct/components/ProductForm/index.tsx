@@ -4,10 +4,10 @@ import { ICreateProduct, IProduct } from "../../../../models";
 import { InputText } from "primereact/inputtext";
 import styled from "styled-components";
 import { Button } from "primereact/button";
-import { useMutation } from "react-query";
+import { useMutation, QueryClient } from "react-query";
 import { URL } from "../../../../constants";
 import { ProductService } from "../../../../services/product-service";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InputField } from "../../../../components/UI/Forms/InputField";
 import { validationYup } from "../../../../schema/validations/validationSchema";
 
@@ -22,10 +22,15 @@ const createProduct = (product: ICreateProduct) =>
   ProductService.createProduct(product);
 
 export const ProductForm = () => {
-  const { mutate } = useMutation(createProduct, {});
+  const navigation = useNavigate();
+  const { mutate, isLoading } = useMutation(createProduct, {
+    onSuccess: () => navigation(URL.PRODUCTS),
+    // onError
+  });
 
   const handleSubmit = useCallback((data: ICreateProduct) => {
     mutate(data);
+    console.log("isLoading", isLoading);
   }, []);
 
   const formik = useFormik({
@@ -33,6 +38,7 @@ export const ProductForm = () => {
     onSubmit: handleSubmit,
     validationSchema: validationYup,
   });
+  console.log(isLoading, "isLoading outside");
 
   return (
     <Root>
@@ -75,10 +81,17 @@ export const ProductForm = () => {
           errors={formik.errors.image}
           required
         />
-        <Button type="submit" className="mt-2">
-          Submit
-        </Button>
-        <Link to={URL.PRODUCTS}>back</Link>
+        <div className="mt-2">
+          <Button type="submit" disabled={isLoading ? true : false}>
+            Submit
+          </Button>
+          <Button
+            onClick={() => navigation(URL.PRODUCTS)}
+            style={{ marginLeft: "55px" }}
+          >
+            Back
+          </Button>
+        </div>
       </form>
     </Root>
   );

@@ -37,6 +37,15 @@ export class ProductController {
     ctx: RestContext
   ) {
     try {
+      const idParams = req.params.id;
+      const product = products.find((p) => p.id === idParams);
+
+      if (!product) throw new Error("Product not found");
+      products.splice(
+        products.findIndex((p) => p.id === idParams),
+        1
+      );
+
       return res(ctx.status(200));
     } catch (err) {
       ctx.json({ message: (err as Error).message });

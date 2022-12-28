@@ -8,12 +8,6 @@ interface IProps {
 }
 
 export const EditModal = ({ visible, onCancel }: IProps) => {
-  const [choose, setChoose] = useState(false);
-
-  const onHide = () => {
-    onCancel();
-  };
-
   const renderFooter = () => {
     return (
       <div>
