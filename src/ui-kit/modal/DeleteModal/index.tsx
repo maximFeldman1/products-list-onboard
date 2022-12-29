@@ -23,18 +23,28 @@ export const DeleteModal = ({
 }: IProps) => {
   const toast = useRef(null);
   const { mutate } = useMutation(deleteProduct, {
-    onSuccess: () => onDone(),
+    onSuccess: () => {
+      toast?.current?.show({
+        severity: "success",
+        summary: "Success Message",
+        detail: "Delete Success",
+        life: 3000,
+      });
+      onDone();
+    },
+    onError() {
+      toast?.current?.show({
+        severity: "error",
+        summary: "Error Message",
+        detail: "You Failed",
+        life: 3000,
+      });
+    },
   });
 
   const onHide = useCallback(() => {
     mutate(productId);
     onCancel();
-    toast?.current?.show({
-      severity: "success",
-      summary: "Success Message",
-      detail: "Delete Success",
-      life: 3000,
-    });
   }, []);
 
   const renderFooter = () => (
