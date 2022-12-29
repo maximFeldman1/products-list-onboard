@@ -9,4 +9,5 @@ export const form = {
     submit: "submit",
     back: "back",
   },
+  title: "Form Product",
 };

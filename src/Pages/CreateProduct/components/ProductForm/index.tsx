@@ -42,7 +42,7 @@ export const ProductForm = () => {
   return (
     <Root>
       <form onSubmit={formik.handleSubmit}>
-        <h1>Form Product</h1>
+        <h1>{t("form.title")}</h1>
         <InputField
           name={t("form.inputs.price")}
           type="number"
