@@ -5,6 +5,7 @@ import { ProductService } from "../../../services/product-service";
 import { useMutation, useQueryClient } from "react-query";
 import { Toast } from "primereact/toast";
 import { useProductContext } from "../../../context/contextProducts";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   visible: boolean;
@@ -22,21 +23,22 @@ export const DeleteModal = ({
   onDone,
 }: IProps) => {
   const toast = useRef(null);
+  const { t } = useTranslation();
   const { mutate } = useMutation(deleteProduct, {
     onSuccess: () => {
       toast?.current?.show({
-        severity: "success",
-        summary: "Success Message",
-        detail: "Delete Success",
+        severity: t("toast.delete.success"),
+        summary: t("toast.delete.successMessage"),
+        detail: t("toast.delete.deleteSuccess"),
         life: 3000,
       });
       onDone();
     },
     onError() {
       toast?.current?.show({
-        severity: "error",
-        summary: "Error Message",
-        detail: "You Failed",
+        severity: t("toast.dailed.error"),
+        summary: t("mtoast.dailed.errorMessage"),
+        detail: t("toast.dailed.faild"),
         life: 3000,
       });
     },

@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { useFormik } from "formik";
 import { ICreateProduct, IProduct } from "../../../../models";
-import { InputText } from "primereact/inputtext";
 import styled from "styled-components";
 import { Button } from "primereact/button";
 import { useMutation } from "react-query";
@@ -10,6 +9,7 @@ import { ProductService } from "../../../../services/product-service";
 import { useNavigate } from "react-router-dom";
 import { InputField } from "../../../../components/UI/Forms/InputField";
 import { validationYup } from "../../../../schema/validations/validationSchema";
+import { useTranslation } from "react-i18next";
 
 const Root = styled.div`
   display: flex;
@@ -22,6 +22,7 @@ const createProduct = (product: ICreateProduct) =>
   ProductService.createProduct(product);
 
 export const ProductForm = () => {
+  const { t } = useTranslation();
   const navigation = useNavigate();
   const { mutate, isLoading } = useMutation(createProduct, {
     onSuccess: () => navigation(URL.PRODUCTS),
@@ -40,9 +41,9 @@ export const ProductForm = () => {
   return (
     <Root>
       <form onSubmit={formik.handleSubmit}>
-        <h1>Form Product</h1>
+        <h1>{t("form.title")}</h1>
         <InputField
-          name="price"
+          name={t("form.inputs.price")}
           type="number"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -51,7 +52,7 @@ export const ProductForm = () => {
           required
         />
         <InputField
-          name="name"
+          name={t("form.inputs.name")}
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -61,7 +62,7 @@ export const ProductForm = () => {
         />
 
         <InputField
-          name="brand"
+          name={t("form.inputs.brand")}
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -70,7 +71,7 @@ export const ProductForm = () => {
           required
         />
         <InputField
-          name="image"
+          name={t("form.inputs.image")}
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -80,13 +81,13 @@ export const ProductForm = () => {
         />
         <div className="mt-2">
           <Button type="submit" disabled={isLoading ? true : false}>
-            Submit
+            {t("form.buttons.submit")}
           </Button>
           <Button
             onClick={() => navigation(URL.PRODUCTS)}
             style={{ marginLeft: "55px" }}
           >
-            Back
+            {t("form.buttons.back")}
           </Button>
         </div>
       </form>
