@@ -7,7 +7,7 @@ import { Button } from "primereact/button";
 import { useMutation } from "react-query";
 import { URL } from "../../../../constants";
 import { ProductService } from "../../../../services/product-service";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { InputField } from "../../../../components/UI/Forms/InputField";
 import { validationYup } from "../../../../schema/validations/validationSchema";
 
@@ -22,7 +22,10 @@ const createProduct = (product: ICreateProduct) =>
   ProductService.createProduct(product);
 
 export const ProductForm = () => {
-  const { mutate } = useMutation(createProduct, {});
+  const navigation = useNavigate();
+  const { mutate, isLoading } = useMutation(createProduct, {
+    onSuccess: () => navigation(URL.PRODUCTS),
+  });
 
   const handleSubmit = useCallback((data: ICreateProduct) => {
     mutate(data);
@@ -75,10 +78,17 @@ export const ProductForm = () => {
           errors={formik.errors.image}
           required
         />
-        <Button type="submit" className="mt-2">
-          Submit
-        </Button>
-        <Link to={URL.PRODUCTS}>back</Link>
+        <div className="mt-2">
+          <Button type="submit" disabled={isLoading ? true : false}>
+            Submit
+          </Button>
+          <Button
+            onClick={() => navigation(URL.PRODUCTS)}
+            style={{ marginLeft: "55px" }}
+          >
+            Back
+          </Button>
+        </div>
       </form>
     </Root>
   );
