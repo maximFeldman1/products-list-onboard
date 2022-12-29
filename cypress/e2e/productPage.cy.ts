@@ -6,7 +6,9 @@ describe("home page", () => {
     cy.findByTestId("product-price__input").type(123);
     cy.findByTestId("product-name__input").type("nike");
     cy.findByTestId("product-brand__input").type("Nike");
-    cy.findByTestId("product-image__input").type("fdsd");
+    cy.findByTestId("product-image__input").type(
+      "https://www.pexels.com/photo/close-up-portrait-of-lion-247502/"
+    );
     cy.findByTestId("submit__button").click();
   });
 
