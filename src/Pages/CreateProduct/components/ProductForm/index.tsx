@@ -43,7 +43,8 @@ export const ProductForm = () => {
       <form onSubmit={formik.handleSubmit}>
         <h1>{t("form.title")}</h1>
         <InputField
-          name={t("form.inputs.price")}
+          data-testid="product-price__input"
+          name={t("form.input.price")}
           type="number"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -52,7 +53,8 @@ export const ProductForm = () => {
           required
         />
         <InputField
-          name={t("form.inputs.name")}
+          data-testid="product-name__input"
+          name={t("form.input.name")}
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -62,7 +64,8 @@ export const ProductForm = () => {
         />
 
         <InputField
-          name={t("form.inputs.brand")}
+          data-testid="product-brand__input"
+          name={t("form.input.brand")}
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -71,7 +74,8 @@ export const ProductForm = () => {
           required
         />
         <InputField
-          name={t("form.inputs.image")}
+          data-testid="product-image__input"
+          name={t("form.input.image")}
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -80,7 +84,11 @@ export const ProductForm = () => {
           required
         />
         <div className="mt-2">
-          <Button type="submit" disabled={isLoading ? true : false}>
+          <Button
+            data-testid="submit__button"
+            type="submit"
+            disabled={isLoading ? true : false}
+          >
             {t("form.buttons.submit")}
           </Button>
           <Button

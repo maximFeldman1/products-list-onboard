@@ -17,7 +17,7 @@ const Root = styled.div`
 
 export const ProductsTable = () => {
   const { products, refetch } = useProductContext();
-  
+
   return (
     <Root className="ag-theme-alpine">
       <AgGridReact rowData={products?.data} columnDefs={productColumns} />
