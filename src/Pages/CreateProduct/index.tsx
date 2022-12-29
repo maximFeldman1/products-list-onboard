@@ -1,5 +1,7 @@
 import { ProductForm } from "./components";
 
-export const CreateProduct = () => {
+const CreateProduct = () => {
   return <ProductForm />;
 };
+
+export default CreateProduct;

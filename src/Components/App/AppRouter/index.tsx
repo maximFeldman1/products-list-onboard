@@ -1,12 +1,11 @@
 import { Suspense, lazy } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import styled from "styled-components";
-import { CreateProduct } from "../../../pages/CreateProduct";
 import { URL } from "../../../constants";
 import { useTranslation } from "react-i18next";
 
 const Products = lazy(() => import("../../../pages/Products"));
-
+const CreateProduct = lazy(() => import("../../../pages/CreateProduct"));
 const Root = styled.div`
   margin-top: 30px;
 `;

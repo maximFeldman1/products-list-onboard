@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { useFormik } from "formik";
 import { ICreateProduct, IProduct } from "../../../../models";
-import { InputText } from "primereact/inputtext";
 import styled from "styled-components";
 import { Button } from "primereact/button";
 import { useMutation } from "react-query";
