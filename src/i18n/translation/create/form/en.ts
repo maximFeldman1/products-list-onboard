@@ -1,5 +1,5 @@
 export const form = {
-  inputs: {
+  input: {
     name: "name",
     price: "price",
     brand: "brand",
