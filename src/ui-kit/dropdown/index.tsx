@@ -3,6 +3,7 @@ import { useModal } from "../../ui-kit/modal/";
 import { Menu } from "primereact/menu";
 import { Button } from "primereact/button";
 import { useProductContext } from "../../context/contextProducts";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   productId: string;
@@ -11,20 +12,21 @@ export const DropdownSelector = ({ productId }: IProps) => {
   const { openModal, closeModal } = useModal();
   const { refetch } = useProductContext();
   const menu = useRef(null);
+  const { t } = useTranslation();
 
   const items = [
     {
-      label: "Options",
+      label: t("modal.options"),
       items: [
         {
-          label: "Edit",
+          label: t("modal.edit"),
           icon: "pi pi-refresh",
           command: () => {
             openModal("edit", { productId });
           },
         },
         {
-          label: "Delete",
+          label: t("modal.delete"),
           icon: "pi pi-times",
           command: () => {
             openModal("delete", { productId, onDone: refetch });

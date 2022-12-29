@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 const Root = styled.div`
   display: flex;
@@ -10,9 +11,10 @@ const Root = styled.div`
 `;
 
 export const Header = () => {
+  const { t } = useTranslation();
   return (
     <Root>
-      <h1>Products List</h1>
+      <h1>{t("title")}</h1>
     </Root>
   );
 };
