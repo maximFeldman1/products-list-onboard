@@ -13,4 +13,7 @@ export class ProductService {
   static deleteProduct(id: string) {
     return Api.delete<IProduct>(apiUrl({ id }).products.delete);
   }
+  static editProduct(id: string, newProduct: ICreateProduct) {
+    return Api.put<IProduct>(apiUrl({ id }).products.edit, newProduct);
+  }
 }

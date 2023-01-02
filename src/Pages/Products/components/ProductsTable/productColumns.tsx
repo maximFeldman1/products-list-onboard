@@ -10,7 +10,7 @@ export const productColumns = [
   { field: "image" },
   {
     cellRenderer: ({ data }: any) => {
-      return <DropdownSelector productId={data.id} />;
+      return <DropdownSelector productId={data.id} productData={data} />;
     },
   },
 ];

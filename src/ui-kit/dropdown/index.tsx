@@ -4,11 +4,13 @@ import { Menu } from "primereact/menu";
 import { Button } from "primereact/button";
 import { useProductContext } from "../../context/contextProducts";
 import { useTranslation } from "react-i18next";
+import { IProduct } from "models";
 
 interface IProps {
   productId: string;
+  productData: IProduct;
 }
-export const DropdownSelector = ({ productId }: IProps) => {
+export const DropdownSelector = ({ productId, productData }: IProps) => {
   const { openModal, closeModal } = useModal();
   const { refetch } = useProductContext();
   const menu = useRef(null);
@@ -22,7 +24,12 @@ export const DropdownSelector = ({ productId }: IProps) => {
           label: t("modal.edit"),
           icon: "pi pi-refresh",
           command: () => {
-            openModal("edit", { productId });
+            openModal("edit", {
+              productId,
+              productData,
+              closeModal,
+              onDone: refetch,
+            });
           },
         },
         {

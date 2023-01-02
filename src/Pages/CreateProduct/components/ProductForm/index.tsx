@@ -6,10 +6,16 @@ import { Button } from "primereact/button";
 import { useMutation } from "react-query";
 import { URL } from "../../../../constants";
 import { ProductService } from "../../../../services/product-service";
-import { useNavigate } from "react-router-dom";
 import { InputField } from "../../../../components/UI/Forms/InputField";
 import { validationYup } from "../../../../schema/validations/validationSchema";
 import { useTranslation } from "react-i18next";
+
+interface IProps {
+  productData?: IProduct;
+  handleSuccess: () => void;
+  onCancel?: () => void;
+  onDone?: () => void;
+}
 
 const Root = styled.div`
   display: flex;
@@ -21,19 +27,42 @@ const Root = styled.div`
 const createProduct = (product: ICreateProduct) =>
   ProductService.createProduct(product);
 
-export const ProductForm = () => {
+export const ProductForm = ({
+  productData,
+  handleSuccess,
+  onCancel,
+  onDone,
+}: IProps) => {
   const { t } = useTranslation();
-  const navigation = useNavigate();
-  const { mutate, isLoading } = useMutation(createProduct, {
-    onSuccess: () => navigation(URL.PRODUCTS),
+  const editProduct = (product: ICreateProduct) =>
+    ProductService.editProduct(productData?.id || "", product);
+
+  const { mutate: createMutate, isLoading: isLoading } = useMutation(
+    createProduct,
+    {
+      onSuccess: handleSuccess,
+    }
+  );
+
+  const { mutate: editMutate } = useMutation(editProduct, {
+    onSuccess: () => {
+      handleSuccess;
+      onDone;
+    },
   });
 
   const handleSubmit = useCallback((data: ICreateProduct) => {
-    mutate(data);
+    productData ? editMutate(data) : createMutate(data);
   }, []);
 
   const formik = useFormik({
-    initialValues: { price: 0, name: " ", brand: " ", image: " " },
+    initialValues: {
+      price: productData?.price || 0,
+      name: productData?.name || "",
+      brand: productData?.brand || "",
+      image: productData?.image || "",
+    },
+
     onSubmit: handleSubmit,
     validationSchema: validationYup,
   });
@@ -91,10 +120,7 @@ export const ProductForm = () => {
           >
             {t("form.buttons.submit")}
           </Button>
-          <Button
-            onClick={() => navigation(URL.PRODUCTS)}
-            style={{ marginLeft: "55px" }}
-          >
+          <Button onClick={onCancel} style={{ marginLeft: "55px" }}>
             {t("form.buttons.back")}
           </Button>
         </div>
