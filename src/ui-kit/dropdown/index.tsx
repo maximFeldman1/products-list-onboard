@@ -40,6 +40,7 @@ export const DropdownSelector = ({ productId }: IProps) => {
     <div>
       <Menu model={items} popup ref={menu} id="popup_menu" />
       <Button
+        data-testid="menu__button"
         icon="pi pi-ellipsis-v"
         onClick={(e) => menu?.current?.toggle(e)}
         aria-controls="popup_menu"

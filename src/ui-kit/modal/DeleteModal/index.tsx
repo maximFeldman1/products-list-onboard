@@ -52,12 +52,18 @@ export const DeleteModal = ({
   const renderFooter = () => (
     <div>
       <Button
+        data-testid="no__button"
         label="No"
         icon="pi pi-times"
         onClick={onCancel}
         className="p-button-text"
       />
-      <Button label="Yes" icon="pi pi-check" onClick={onHide} />
+      <Button
+        data-testid="yes__button"
+        label="Yes"
+        icon="pi pi-check"
+        onClick={onHide}
+      />
     </div>
   );
 

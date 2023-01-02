@@ -6,7 +6,7 @@ import { URL } from "../../../constants";
 export const CreateProductBtn = () => {
   return (
     <Link to={URL.CREATE_PRODUCT}>
-      <i className="pi pi-plus-circle m-2" />
+      <i className="pi pi-plus-circle m-2" data-testid="create-product__link" />
     </Link>
   );
 };
