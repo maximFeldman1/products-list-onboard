@@ -1,6 +1,8 @@
+import { URL } from "../../src/constants/url";
+
 describe("home page", () => {
   it("create new product", () => {
-    cy.visit("http://127.0.0.1:3000/products");
+    cy.visit(URL.PRODUCTS);
 
     cy.findByTestId("create-product__link").click();
     cy.findByTestId("product-price__input").type(123);
@@ -13,20 +15,14 @@ describe("home page", () => {
   });
 
   it("delete product", () => {
-    cy.visit("http://127.0.0.1:3000/products");
-
-    cy.wait(1000);
-    cy.get(
-      "#root > div.Root-sc-ktahde-0.fVzYgt > div > div.Root-sc-qv9mpy-0.byYsWa.ag-theme-alpine > div > div > div.ag-root-wrapper-body.ag-focus-managed.ag-layout-normal > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-row-no-animation.ag-layout-normal > div.ag-center-cols-clipper > div > div > div.ag-row-odd.ag-row-no-focus.ag-row.ag-row-level-0.ag-row-position-absolute.ag-row-last > div:nth-child(6) > div > button"
-    ).click();
+    cy.visit(URL.PRODUCTS);
+    cy.findByTestId("menu__button").click();
     cy.findByText("Delete").click();
     cy.findByTestId("yes__button").click();
   });
 
   it("doesn`t delete product", () => {
-    cy.visit("http://127.0.0.1:3000/products");
-
-    cy.wait(1000);
+    cy.visit(URL.PRODUCTS);
     cy.get(
       "#root > div.Root-sc-ktahde-0.fVzYgt > div > div.Root-sc-qv9mpy-0.byYsWa.ag-theme-alpine > div > div > div.ag-root-wrapper-body.ag-focus-managed.ag-layout-normal > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-row-no-animation.ag-layout-normal > div.ag-center-cols-clipper > div > div > div.ag-row-odd.ag-row-no-focus.ag-row.ag-row-level-0.ag-row-position-absolute.ag-row-last > div:nth-child(6) > div > button"
     ).click();
