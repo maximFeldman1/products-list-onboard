@@ -2,15 +2,28 @@ import { useNavigate } from "react-router-dom";
 import { ProductForm } from "./components";
 import { URL } from "../../constants";
 import { useCallback } from "react";
+import { ICreateProduct } from "models";
+import { ProductService } from "../../services";
+import { useMutation } from "react-query";
+
+const createProduct = (product: ICreateProduct) =>
+  ProductService.createProduct(product);
 
 const CreateProduct = () => {
   const navigation = useNavigate();
 
-  const handleSuccess = useCallback(() => {
-    navigation(URL.PRODUCTS);
-  }, [navigation]);
+  const { mutate: createMutate, isLoading } = useMutation(createProduct, {
+    onSuccess: () => navigation(URL.PRODUCTS),
+  });
 
-  return <ProductForm handleSuccess={handleSuccess} />;
+  const onSubmit = useCallback(
+    (data: ICreateProduct) => {
+      createMutate(data);
+    },
+    [navigation]
+  );
+
+  return <ProductForm onSubmit={onSubmit} isLoading={isLoading} />;
 };
 
 export default CreateProduct;

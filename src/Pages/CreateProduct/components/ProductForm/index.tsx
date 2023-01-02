@@ -6,15 +6,16 @@ import { Button } from "primereact/button";
 import { useMutation } from "react-query";
 import { URL } from "../../../../constants";
 import { ProductService } from "../../../../services/product-service";
-import { InputField } from "../../../../components/UI/Forms/InputField";
+import { InputField } from "../../../../Components/UI/Forms/InputField";
 import { validationYup } from "../../../../schema/validations/validationSchema";
 import { useTranslation } from "react-i18next";
 
 interface IProps {
-  productData?: IProduct;
-  handleSuccess: () => void;
+  initialValues?: IProduct;
   onCancel?: () => void;
   onDone?: () => void;
+  onSubmit: (data: ICreateProduct) => void;
+  isLoading?: boolean;
 }
 
 const Root = styled.div`
@@ -24,43 +25,24 @@ const Root = styled.div`
   padding-top: 30px;
 `;
 
-const createProduct = (product: ICreateProduct) =>
-  ProductService.createProduct(product);
-
 export const ProductForm = ({
-  productData,
-  handleSuccess,
+  initialValues,
   onCancel,
-  onDone,
+  onSubmit,
+  isLoading,
 }: IProps) => {
   const { t } = useTranslation();
-  const editProduct = (product: ICreateProduct) =>
-    ProductService.editProduct(productData?.id || "", product);
-
-  const { mutate: createMutate, isLoading: isLoading } = useMutation(
-    createProduct,
-    {
-      onSuccess: handleSuccess,
-    }
-  );
-
-  const { mutate: editMutate } = useMutation(editProduct, {
-    onSuccess: () => {
-      handleSuccess;
-      onDone;
-    },
-  });
 
   const handleSubmit = useCallback((data: ICreateProduct) => {
-    productData ? editMutate(data) : createMutate(data);
+    initialValues ? onSubmit(data) : onSubmit(data);
   }, []);
 
   const formik = useFormik({
-    initialValues: {
-      price: productData?.price || 0,
-      name: productData?.name || "",
-      brand: productData?.brand || "",
-      image: productData?.image || "",
+    initialValues: initialValues || {
+      price: 0,
+      name: "",
+      brand: "",
+      image: "",
     },
 
     onSubmit: handleSubmit,
@@ -112,7 +94,7 @@ export const ProductForm = ({
           errors={formik.errors.image}
           required
         />
-        <div className="mt-2">
+        <div className="mt-2 ml-1">
           <Button
             data-testid="submit__button"
             type="submit"
@@ -120,7 +102,7 @@ export const ProductForm = ({
           >
             {t("form.buttons.submit")}
           </Button>
-          <Button onClick={onCancel} style={{ marginLeft: "55px" }}>
+          <Button className="ml-7" onClick={onCancel}>
             {t("form.buttons.back")}
           </Button>
         </div>

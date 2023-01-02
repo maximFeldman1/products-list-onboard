@@ -2,7 +2,9 @@ import React, { useState, useCallback } from "react";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { ProductForm } from "../../../Pages/CreateProduct/components/ProductForm";
-import { IProduct } from "models";
+import { ICreateProduct, IProduct } from "models";
+import { ProductService } from "../../../services/product-service";
+import { useMutation } from "react-query";
 
 interface IProps {
   visible: boolean;
@@ -21,21 +23,27 @@ export const EditModal = ({
   closeModal,
   onDone,
 }: IProps) => {
-  const onHide = useCallback(() => {
-    onCancel();
-  }, []);
+  const editProduct = (product: ICreateProduct) =>
+    ProductService.editProduct(productId || "", product);
 
-  const handleSuccess = useCallback(() => {
-    closeModal();
+  const { mutate: editMutate } = useMutation(editProduct, {
+    onSuccess: () => {
+      onDone();
+    },
+  });
+
+  const onSubmit = useCallback((data: ICreateProduct) => {
+    editMutate(data);
+    onCancel();
   }, []);
 
   return (
     <Dialog visible={visible} onHide={onCancel} header="Edit Product">
       <ProductForm
-        productData={productData}
-        handleSuccess={handleSuccess}
+        initialValues={productData}
         onCancel={onCancel}
         onDone={onDone}
+        onSubmit={onSubmit}
       />
     </Dialog>
   );
