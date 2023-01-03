@@ -1,35 +1,47 @@
-import React, { useState } from "react";
+import { useCallback } from "react";
 import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
+import { ProductForm } from "../../../Pages/CreateProduct/components/ProductForm";
+import { ICreateProduct, IProduct } from "models";
+import { ProductService } from "../../../services/product-service";
+import { useMutation } from "react-query";
 
 interface IProps {
   visible: boolean;
   onCancel: () => void;
+  productId: string;
+  productData: IProduct;
+  onDone: () => void;
 }
 
-export const EditModal = ({ visible, onCancel }: IProps) => {
-  const renderFooter = () => {
-    return (
-      <div>
-        <Button
-          label="No"
-          icon="pi pi-times"
-          onClick={onCancel}
-          className="p-button-text"
-        />
-        <Button label="Yes" icon="pi pi-check" onClick={onHide} autoFocus />
-      </div>
-    );
-  };
+export const EditModal = ({
+  visible,
+  onCancel,
+  productId,
+  productData,
+  onDone,
+}: IProps) => {
+  const editProduct = (product: ICreateProduct) =>
+    ProductService.editProduct(productId || "", product);
+
+  const { mutate: editMutate } = useMutation(editProduct, {
+    onSuccess: () => {
+      onDone();
+    },
+  });
+
+  const onSubmit = useCallback((data: ICreateProduct) => {
+    editMutate(data);
+    onCancel();
+  }, []);
 
   return (
-    <Dialog
-      visible={visible}
-      onHide={onCancel}
-      footer={renderFooter()}
-      header="Edit Product"
-    >
-      <p>Edit form</p>
+    <Dialog visible={visible} onHide={onCancel} header="Edit Product">
+      <ProductForm
+        initialValues={productData}
+        onCancel={onCancel}
+        onDone={onDone}
+        onSubmit={onSubmit}
+      />
     </Dialog>
   );
 };

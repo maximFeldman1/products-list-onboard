@@ -51,4 +51,25 @@ export class ProductController {
       ctx.json({ message: (err as Error).message });
     }
   }
+  static async editProduct(
+    req: RestRequest<IProduct>,
+    res: ResponseFunction<IProduct>,
+    ctx: RestContext
+  ) {
+    try {
+      const id = req.params["id"].toString();
+      const oldProduct: IProduct = await req.json();
+      const newProduct = products.find((p) => p.id === id);
+
+      if (!newProduct) throw new Error("Product not found");
+
+      Object.assign(newProduct, {
+        ...oldProduct,
+      });
+
+      return res(ctx.status(200));
+    } catch (err) {
+      ctx.json({ message: (err as Error).message });
+    }
+  }
 }

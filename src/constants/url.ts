@@ -12,5 +12,6 @@ export const apiUrl = ({ id }: Params = {}) => ({
     getAll: "/api/products",
     create: "/api/products/create",
     delete: `/api/products/${id}`,
+    edit: `/api/products/${id}`,
   },
 });

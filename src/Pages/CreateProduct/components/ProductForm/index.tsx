@@ -3,13 +3,17 @@ import { useFormik } from "formik";
 import { ICreateProduct, IProduct } from "../../../../models";
 import styled from "styled-components";
 import { Button } from "primereact/button";
-import { useMutation } from "react-query";
-import { URL } from "../../../../constants";
-import { ProductService } from "../../../../services/product-service";
-import { useNavigate } from "react-router-dom";
-import { InputField } from "../../../../components/UI/Forms/InputField";
+import { InputField } from "../../../../Components/UI/Forms/InputField";
 import { validationYup } from "../../../../schema/validations/validationSchema";
 import { useTranslation } from "react-i18next";
+
+interface IProps {
+  initialValues?: IProduct;
+  onCancel?: () => void;
+  onDone?: () => void;
+  onSubmit: (data: ICreateProduct | IProduct) => void;
+  isLoading?: boolean;
+}
 
 const Root = styled.div`
   display: flex;
@@ -18,23 +22,27 @@ const Root = styled.div`
   padding-top: 30px;
 `;
 
-const createProduct = (product: ICreateProduct) =>
-  ProductService.createProduct(product);
-
-export const ProductForm = () => {
+export const ProductForm = ({
+  initialValues,
+  onCancel,
+  onSubmit,
+  isLoading,
+}: IProps) => {
   const { t } = useTranslation();
-  const navigation = useNavigate();
-  const { mutate, isLoading } = useMutation(createProduct, {
-    onSuccess: () => navigation(URL.PRODUCTS),
-  });
 
-  const handleSubmit = useCallback((data: ICreateProduct) => {
-    mutate(data);
-  }, []);
+  // const handleSubmit = useCallback((data: ICreateProduct) => {
+  //   initialValues ? onSubmit(data) : onSubmit(data);
+  // }, []);
 
   const formik = useFormik({
-    initialValues: { price: 0, name: " ", brand: " ", image: " " },
-    onSubmit: handleSubmit,
+    initialValues: initialValues || {
+      price: 0,
+      name: "",
+      brand: "",
+      image: "",
+    },
+
+    onSubmit,
     validationSchema: validationYup,
   });
 
@@ -83,7 +91,7 @@ export const ProductForm = () => {
           errors={formik.errors.image}
           required
         />
-        <div className="mt-2">
+        <div className="mt-2 ml-1">
           <Button
             data-testid="submit__button"
             type="submit"
@@ -91,10 +99,7 @@ export const ProductForm = () => {
           >
             {t("form.buttons.submit")}
           </Button>
-          <Button
-            onClick={() => navigation(URL.PRODUCTS)}
-            style={{ marginLeft: "55px" }}
-          >
+          <Button className="ml-7" onClick={onCancel}>
             {t("form.buttons.back")}
           </Button>
         </div>

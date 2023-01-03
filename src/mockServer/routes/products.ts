@@ -9,4 +9,5 @@ export const productRoutes = [
     apiUrl({ id: ":id" }).products.delete,
     ProductController.deleteProduct
   ),
+  rest.put(apiUrl({ id: ":id" }).products.edit, ProductController.editProduct),
 ];
