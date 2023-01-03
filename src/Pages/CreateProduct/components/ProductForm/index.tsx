@@ -3,9 +3,6 @@ import { useFormik } from "formik";
 import { ICreateProduct, IProduct } from "../../../../models";
 import styled from "styled-components";
 import { Button } from "primereact/button";
-import { useMutation } from "react-query";
-import { URL } from "../../../../constants";
-import { ProductService } from "../../../../services/product-service";
 import { InputField } from "../../../../Components/UI/Forms/InputField";
 import { validationYup } from "../../../../schema/validations/validationSchema";
 import { useTranslation } from "react-i18next";
@@ -14,7 +11,7 @@ interface IProps {
   initialValues?: IProduct;
   onCancel?: () => void;
   onDone?: () => void;
-  onSubmit: (data: ICreateProduct) => void;
+  onSubmit: (data: ICreateProduct | IProduct) => void;
   isLoading?: boolean;
 }
 
@@ -33,9 +30,9 @@ export const ProductForm = ({
 }: IProps) => {
   const { t } = useTranslation();
 
-  const handleSubmit = useCallback((data: ICreateProduct) => {
-    initialValues ? onSubmit(data) : onSubmit(data);
-  }, []);
+  // const handleSubmit = useCallback((data: ICreateProduct) => {
+  //   initialValues ? onSubmit(data) : onSubmit(data);
+  // }, []);
 
   const formik = useFormik({
     initialValues: initialValues || {
@@ -45,7 +42,7 @@ export const ProductForm = ({
       image: "",
     },
 
-    onSubmit: handleSubmit,
+    onSubmit,
     validationSchema: validationYup,
   });
 

@@ -1,6 +1,5 @@
-import React, { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
 import { ProductForm } from "../../../Pages/CreateProduct/components/ProductForm";
 import { ICreateProduct, IProduct } from "models";
 import { ProductService } from "../../../services/product-service";
@@ -11,7 +10,6 @@ interface IProps {
   onCancel: () => void;
   productId: string;
   productData: IProduct;
-  closeModal: () => void;
   onDone: () => void;
 }
 
@@ -20,7 +18,6 @@ export const EditModal = ({
   onCancel,
   productId,
   productData,
-  closeModal,
   onDone,
 }: IProps) => {
   const editProduct = (product: ICreateProduct) =>
