@@ -11,6 +11,6 @@ export const validationYup = Yup.object({
     })
     .required("Required"),
   image: Yup.string()
-    .max(120, "Must be 120 characters or less")
+    .max(400, "Must be 120 characters or less")
     .required("Required"),
 });
