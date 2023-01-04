@@ -14,7 +14,7 @@ export const Header = () => {
   const { t } = useTranslation();
   return (
     <Root>
-      <h1>{t("title")}</h1>
+      <h1 data-testid="heading">{t("title")}</h1>
     </Root>
   );
 };

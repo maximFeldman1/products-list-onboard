@@ -30,10 +30,6 @@ export const ProductForm = ({
 }: IProps) => {
   const { t } = useTranslation();
 
-  // const handleSubmit = useCallback((data: ICreateProduct) => {
-  //   initialValues ? onSubmit(data) : onSubmit(data);
-  // }, []);
-
   const formik = useFormik({
     initialValues: initialValues || {
       price: 0,
@@ -49,7 +45,7 @@ export const ProductForm = ({
   return (
     <Root>
       <form onSubmit={formik.handleSubmit}>
-        <h1>{t("form.title")}</h1>
+        <h1 data-testid="form-title__title">{t("form.title")}</h1>
         <InputField
           data-testid="product-price__input"
           name={t("form.input.price")}
