@@ -4,6 +4,7 @@ import { ProductForm } from "../../../Pages/CreateProduct/components/ProductForm
 import { ICreateProduct, IProduct } from "models";
 import { ProductService } from "../../../services/product-service";
 import { useMutation } from "react-query";
+import styled from "styled-components";
 
 interface IProps {
   visible: boolean;
@@ -12,6 +13,12 @@ interface IProps {
   productData: IProduct;
   onDone: () => void;
 }
+
+const Root = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const EditModal = ({
   visible,
@@ -35,13 +42,15 @@ export const EditModal = ({
   }, []);
 
   return (
-    <Dialog visible={visible} onHide={onCancel} header="Edit Product">
-      <ProductForm
-        initialValues={productData}
-        onCancel={onCancel}
-        onDone={onDone}
-        onSubmit={onSubmit}
-      />
-    </Dialog>
+    <Root>
+      <Dialog visible={visible} onHide={onCancel} header="Edit Product">
+        <ProductForm
+          initialValues={productData}
+          onCancel={onCancel}
+          onDone={onDone}
+          onSubmit={onSubmit}
+        />
+      </Dialog>
+    </Root>
   );
 };

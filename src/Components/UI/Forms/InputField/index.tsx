@@ -1,6 +1,14 @@
 import React from "react";
 import { InputText } from "primereact/inputtext";
-import { ErrorMessage } from "formik";
+interface IProps {
+  value: number | string;
+  type: string;
+  name: string;
+  errors: string | undefined;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  required: boolean;
+}
 
 export const InputField = ({
   value,
@@ -8,7 +16,7 @@ export const InputField = ({
   name,
   errors,
   ...defaultProps
-}: any) => {
+}: IProps) => {
   return (
     <>
       <span className="p-float-label mt-4">
