@@ -5,7 +5,10 @@ import { ICreateProduct, IProduct } from "models";
 import { ProductService } from "../../../services/product-service";
 import { useMutation } from "react-query";
 import styled from "styled-components";
+<<<<<<< HEAD
 import { useTranslation } from "react-i18next";
+=======
+>>>>>>> 40a5b5f4ea4235b76f8273947b3c70a5ba641259
 
 interface IProps {
   visible: boolean;
