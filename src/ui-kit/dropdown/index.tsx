@@ -1,15 +1,22 @@
 import { useRef, useState } from "react";
 import { useModal } from "../../ui-kit/modal/";
 import { Menu } from "primereact/menu";
-import { Button } from "primereact/button";
 import { useProductContext } from "../../context/contextProducts";
 import { useTranslation } from "react-i18next";
 import { IProduct } from "models";
+import styled from "styled-components";
 
 interface IProps {
   productId: string;
   productData: IProduct;
 }
+
+const Button = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
 export const DropdownSelector = ({ productId, productData }: IProps) => {
   const { openModal, closeModal } = useModal();
   const { refetch } = useProductContext();
@@ -47,12 +54,11 @@ export const DropdownSelector = ({ productId, productData }: IProps) => {
     <div>
       <Menu model={items} popup ref={menu} id="popup_menu" />
       <Button
-        data-testid="menu__button"
-        icon="pi pi-ellipsis-v"
         onClick={(e) => menu?.current?.toggle(e)}
-        aria-controls="popup_menu"
-        aria-haspopup
-      />
+        data-testid="menu__button"
+      >
+        <i className="pi pi-ellipsis-v" />
+      </Button>
     </div>
   );
 };
