@@ -19,6 +19,7 @@ export const productColumns = [
     },
   },
   {
+    field: "menu",
     cellRenderer: ({ data }: any) => {
       return <DropdownSelector productId={data.id} productData={data} />;
     },

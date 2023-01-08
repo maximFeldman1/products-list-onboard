@@ -5,14 +5,6 @@ import { useCallback } from "react";
 import { ICreateProduct } from "models";
 import { ProductService } from "../../services";
 import { useMutation } from "react-query";
-import styled from "styled-components";
-
-const Root = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-`;
 
 const createProduct = (product: ICreateProduct) =>
   ProductService.createProduct(product);
@@ -20,7 +12,7 @@ const createProduct = (product: ICreateProduct) =>
 const CreateProduct = () => {
   const navigation = useNavigate();
 
-  const { mutate: createMutate } = useMutation(createProduct, {
+  const { mutate: createMutate, isLoading } = useMutation(createProduct, {
     onSuccess: () => navigation(URL.PRODUCTS),
   });
 
@@ -31,15 +23,7 @@ const CreateProduct = () => {
     [navigation]
   );
 
-  const onClickBack = useCallback(() => {
-    navigation(URL.PRODUCTS);
-  }, []);
-
-  return (
-    <Root>
-      <ProductForm onSubmit={onSubmit} onClickBack={onClickBack} />
-    </Root>
-  );
+  return <ProductForm onSubmit={onSubmit} isLoading={isLoading} />;
 };
 
 export default CreateProduct;

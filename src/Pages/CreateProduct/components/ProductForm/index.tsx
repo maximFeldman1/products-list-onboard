@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useFormik } from "formik";
 import { ICreateProduct, IProduct } from "../../../../models";
 import styled from "styled-components";
@@ -6,41 +6,44 @@ import { Button } from "primereact/button";
 import { InputField } from "../../../../Components/UI/Forms/InputField";
 import { validationYup } from "../../../../schema/validations/validationSchema";
 import { useTranslation } from "react-i18next";
-import { DropdownField } from "../../../../Components/UI/Forms/DropdownField";
 
 interface IProps {
   initialValues?: IProduct;
   onCancel?: () => void;
   onDone?: () => void;
   onSubmit: (data: ICreateProduct | IProduct) => void;
-  onClickBack?: () => void;
+  isLoading?: boolean;
 }
+
+const Root = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+`;
 
 export const ProductForm = ({
   initialValues,
   onCancel,
   onSubmit,
-  onClickBack,
+  isLoading,
 }: IProps) => {
   const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues: initialValues || {
-      price: 1,
+      price: 0,
       name: "",
       brand: "",
       image: "",
     },
+
     onSubmit,
     validationSchema: validationYup,
   });
-  const isSubmit =
-    formik.values.price &&
-    formik.values.brand &&
-    formik.values.image &&
-    formik.values.name;
 
   return (
-    <>
+    <Root>
       <form onSubmit={formik.handleSubmit}>
         <h1 data-testid="form-title__title">{t("form.title")}</h1>
         <InputField
@@ -63,13 +66,16 @@ export const ProductForm = ({
           errors={formik.errors.name}
           required
         />
-        <DropdownField
-          name={t("form.input.brand") || ""}
-          value={formik.values.brand}
-          options={["Nike", "Adidas", "Puma"]}
+
+        <InputField
+          data-testid="product-brand__input"
+          name={t("form.input.brand")}
+          type="text"
           onChange={formik.handleChange}
-          placeholder="Select a Brand"
+          onBlur={formik.handleBlur}
+          value={formik.values.brand}
           errors={formik.errors.brand}
+          required
         />
         <InputField
           data-testid="product-image__input"
@@ -85,19 +91,15 @@ export const ProductForm = ({
           <Button
             data-testid="submit__button"
             type="submit"
-            disabled={!isSubmit}
+            disabled={isLoading ? true : false}
           >
             {t("form.buttons.submit")}
           </Button>
-          <Button
-            className="ml-7"
-            onClick={onCancel ? onCancel : onClickBack}
-            type="button"
-          >
+          <Button className="ml-7" onClick={onCancel}>
             {t("form.buttons.back")}
           </Button>
         </div>
       </form>
-    </>
+    </Root>
   );
 };
