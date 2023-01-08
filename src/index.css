@@ -18,3 +18,7 @@
   display: flex;
   justify-content: center;
 }
+
+.p-dropdown {
+  min-width: 192px;
+}

@@ -4,6 +4,8 @@ import { ProductForm } from "../../../Pages/CreateProduct/components/ProductForm
 import { ICreateProduct, IProduct } from "models";
 import { ProductService } from "../../../services/product-service";
 import { useMutation } from "react-query";
+import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   visible: boolean;
@@ -13,6 +15,12 @@ interface IProps {
   onDone: () => void;
 }
 
+const Root = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const EditModal = ({
   visible,
   onCancel,
@@ -20,6 +28,7 @@ export const EditModal = ({
   productData,
   onDone,
 }: IProps) => {
+  const { t } = useTranslation();
   const editProduct = (product: ICreateProduct) =>
     ProductService.editProduct(productId || "", product);
 
@@ -35,13 +44,19 @@ export const EditModal = ({
   }, []);
 
   return (
-    <Dialog visible={visible} onHide={onCancel} header="Edit Product">
-      <ProductForm
-        initialValues={productData}
-        onCancel={onCancel}
-        onDone={onDone}
-        onSubmit={onSubmit}
-      />
-    </Dialog>
+    <Root>
+      <Dialog
+        visible={visible}
+        onHide={onCancel}
+        header={t("modal.editProduct")}
+      >
+        <ProductForm
+          initialValues={productData}
+          onCancel={onCancel}
+          onDone={onDone}
+          onSubmit={onSubmit}
+        />
+      </Dialog>
+    </Root>
   );
 };

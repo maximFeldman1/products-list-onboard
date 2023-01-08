@@ -9,4 +9,5 @@ export const toast = {
     errorMessage: "Failed",
     faild: "Your Delete Failed",
   },
+  wantToDelete: "Are you sure that you want to delete product?",
 };
