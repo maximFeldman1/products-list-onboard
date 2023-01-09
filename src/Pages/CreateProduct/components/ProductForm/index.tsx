@@ -15,6 +15,7 @@ interface IProps {
   onSubmit: (data: ICreateProduct | IProduct) => void;
   onClickBack?: () => void;
 }
+console.log("ckeck");
 
 export const ProductForm = ({
   initialValues,
