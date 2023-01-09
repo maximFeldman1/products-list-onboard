@@ -17,6 +17,9 @@ interface IProps {
   onClickBack?: () => void;
   visible?: boolean;
 }
+interface WrapperBtnProps {
+  visible?: boolean;
+}
 
 export const ProductForm = ({
   initialValues,
@@ -25,11 +28,11 @@ export const ProductForm = ({
   onClickBack,
   visible,
 }: IProps) => {
-  // const WrapperBtn = styled.div`
-  //   position: ${!visible ? "fixed" : "none"};
-  //   bottom: ${!visible ? "30px" : "0"};
-  //   right: ${!visible ? "50px" : "0"};
-  // `;
+  const WrapperBtn = styled.div<WrapperBtnProps>`
+    position: ${({ visible }) => (!visible ? "fixed" : "none")};
+    bottom: ${({ visible }) => (!visible ? "30px" : "0")};
+    right: ${({ visible }) => (!visible ? "50px" : "0")};
+  `;
   const { t } = useTranslation();
   const formik = useFormik({
     initialValues: initialValues || {
