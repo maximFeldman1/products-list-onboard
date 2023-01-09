@@ -45,7 +45,11 @@ export const EditModal = ({
 
   return (
     <Root>
-      <Dialog visible={visible} onHide={onCancel} header={t("modal.editTitle")}>
+      <Dialog
+        visible={visible}
+        onHide={onCancel}
+        header={t("modal.editProduct")}
+      >
         <ProductForm
           initialValues={productData}
           onCancel={onCancel}

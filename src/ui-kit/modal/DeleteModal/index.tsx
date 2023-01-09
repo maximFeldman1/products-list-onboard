@@ -76,7 +76,7 @@ export const DeleteModal = ({
         footer={renderFooter()}
         header="Delete Product"
       >
-        <p>{t("toast.wantToDelete")}</p>
+        <p>{t("toast.delete.message")}</p>
       </Dialog>
     </div>
   );
