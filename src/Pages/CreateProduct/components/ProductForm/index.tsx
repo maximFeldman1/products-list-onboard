@@ -14,6 +14,7 @@ interface IProps {
   onDone?: () => void;
   onSubmit: (data: ICreateProduct | IProduct) => void;
   onClickBack?: () => void;
+  visible?: boolean;
 }
 
 export const ProductForm = ({
@@ -21,7 +22,13 @@ export const ProductForm = ({
   onCancel,
   onSubmit,
   onClickBack,
+  visible,
 }: IProps) => {
+  const WrapperBtn = styled.div`
+    position: ${!visible ? "fixed" : "none"};
+    bottom: ${!visible ? "30px" : "0"};
+    right: ${!visible ? "50px" : "0"};
+  `;
   const { t } = useTranslation();
   const formik = useFormik({
     initialValues: initialValues || {
@@ -81,7 +88,8 @@ export const ProductForm = ({
           errors={formik.errors.image}
           required
         />
-        <div className="mt-2 ml-1">
+
+        <WrapperBtn className="mt-2 ml-1">
           <Button
             data-testid="submit__button"
             type="submit"
@@ -90,13 +98,13 @@ export const ProductForm = ({
             {t("form.buttons.submit")}
           </Button>
           <Button
-            className="ml-7"
+            className="ml-6"
             onClick={onCancel ? onCancel : onClickBack}
             type="button"
           >
             {t("form.buttons.back")}
           </Button>
-        </div>
+        </WrapperBtn>
       </form>
     </>
   );
