@@ -9,9 +9,9 @@ import styled from "styled-components";
 
 const Root = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  padding: 30px;
+  padding: 140px;
 `;
 
 const createProduct = (product: ICreateProduct) =>

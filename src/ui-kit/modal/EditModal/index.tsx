@@ -5,6 +5,7 @@ import { ICreateProduct, IProduct } from "models";
 import { ProductService } from "../../../services/product-service";
 import { useMutation } from "react-query";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   visible: boolean;
@@ -27,6 +28,7 @@ export const EditModal = ({
   productData,
   onDone,
 }: IProps) => {
+  const { t } = useTranslation();
   const editProduct = (product: ICreateProduct) =>
     ProductService.editProduct(productId || "", product);
 
@@ -43,12 +45,17 @@ export const EditModal = ({
 
   return (
     <Root>
-      <Dialog visible={visible} onHide={onCancel} header="Edit Product">
+      <Dialog
+        visible={visible}
+        onHide={onCancel}
+        header={t("modal.editProduct")}
+      >
         <ProductForm
           initialValues={productData}
           onCancel={onCancel}
           onDone={onDone}
           onSubmit={onSubmit}
+          visible={visible}
         />
       </Dialog>
     </Root>

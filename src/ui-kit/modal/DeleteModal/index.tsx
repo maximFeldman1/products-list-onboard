@@ -36,9 +36,9 @@ export const DeleteModal = ({
     },
     onError() {
       toast?.current?.show({
-        severity: t("toast.dailed.error"),
-        summary: t("mtoast.dailed.errorMessage"),
-        detail: t("toast.dailed.faild"),
+        severity: t("toast.failed.error"),
+        summary: t("toast.failed.errorMessage"),
+        detail: t("toast.failed.faild"),
         life: 3000,
       });
     },
@@ -76,7 +76,7 @@ export const DeleteModal = ({
         footer={renderFooter()}
         header="Delete Product"
       >
-        <p>Are you sure that you want to delete product?</p>
+        <p>{t("toast.delete.message")}</p>
       </Dialog>
     </div>
   );

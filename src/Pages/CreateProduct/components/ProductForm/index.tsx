@@ -7,6 +7,7 @@ import { InputField } from "../../../../Components/UI/Forms/InputField";
 import { validationYup } from "../../../../schema/validations/validationSchema";
 import { useTranslation } from "react-i18next";
 import { DropdownField } from "../../../../Components/UI/Forms/DropdownField";
+import { WrapperBtn } from "../../../../helper";
 
 interface IProps {
   initialValues?: IProduct;
@@ -14,6 +15,10 @@ interface IProps {
   onDone?: () => void;
   onSubmit: (data: ICreateProduct | IProduct) => void;
   onClickBack?: () => void;
+  visible?: boolean;
+}
+interface WrapperBtnProps {
+  visible?: boolean;
 }
 
 export const ProductForm = ({
@@ -21,7 +26,13 @@ export const ProductForm = ({
   onCancel,
   onSubmit,
   onClickBack,
+  visible,
 }: IProps) => {
+  const WrapperBtn = styled.div<WrapperBtnProps>`
+    position: ${({ visible }) => (!visible ? "fixed" : "none")};
+    bottom: ${({ visible }) => (!visible ? "30px" : "0")};
+    right: ${({ visible }) => (!visible ? "50px" : "0")};
+  `;
   const { t } = useTranslation();
   const formik = useFormik({
     initialValues: initialValues || {
@@ -33,6 +44,7 @@ export const ProductForm = ({
     onSubmit,
     validationSchema: validationYup,
   });
+
   const isSubmit =
     formik.values.price &&
     formik.values.brand &&
@@ -81,7 +93,7 @@ export const ProductForm = ({
           errors={formik.errors.image}
           required
         />
-        <div className="mt-2 ml-1">
+        <WrapperBtn visible={visible} className="mt-2 ml-1">
           <Button
             data-testid="submit__button"
             type="submit"
@@ -90,13 +102,13 @@ export const ProductForm = ({
             {t("form.buttons.submit")}
           </Button>
           <Button
-            className="ml-7"
+            className="ml-6"
             onClick={onCancel ? onCancel : onClickBack}
             type="button"
           >
             {t("form.buttons.back")}
           </Button>
-        </div>
+        </WrapperBtn>
       </form>
     </>
   );
