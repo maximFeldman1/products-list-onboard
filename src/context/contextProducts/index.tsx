@@ -17,6 +17,7 @@ export const ProductContextProvider = ({ children }: any) => {
   const [text, setText] = useState<string>("");
 
   const { data: products, refetch } = useQuery({
+    refetchOnWindowFocus: false,
     queryKey: ["text", text],
     queryFn: () => ProductService.getAll({ search: text }),
   });
