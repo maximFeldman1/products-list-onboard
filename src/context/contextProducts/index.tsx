@@ -16,8 +16,13 @@ export const ProductContextProvider = ({ children }: any) => {
     "getAllProducts",
     ProductService.getAll
   );
+  // const { data: products, refetch } = useQuery(
+  //   "getAllProducts",
+  //   ProductService.getAll
+  // );
 
   const value = { products, refetch };
+  console.log("products context", products?.data);
 
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>

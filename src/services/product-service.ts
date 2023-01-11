@@ -3,9 +3,15 @@ import { apiUrl } from "../constants";
 import { ICreateProduct, IProduct } from "../models";
 import Api from "./API";
 
+export interface IGetAllProductsRequest {
+  search?: string;
+}
+
 export class ProductService {
-  static getAll() {
-    return Api.get<IProduct[]>(apiUrl({}).products.getAll);
+  static getAll(params?: IGetAllProductsRequest) {
+    return Api.get<IProduct[]>(apiUrl().products.getAll, {
+      params,
+    });
   }
   static createProduct(newProduct: ICreateProduct) {
     return Api.post<IProduct>(apiUrl({}).products.create, newProduct);
