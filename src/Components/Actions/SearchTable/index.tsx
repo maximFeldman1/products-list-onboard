@@ -1,33 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
-import { useMutation } from "react-query";
-import { IGetAllProductsRequest, ProductService } from "../../../services";
 import { useProductContext } from "../../../context/contextProducts";
-
-// const searchProduct = (params: IGetAllProductsRequest) =>
-//   ProductService.getAll(params);
+import debounce from "lodash.debounce";
 
 export const SearchTable = () => {
-  const [text, setText] = useState<string | "">();
-  const { refetch } = useProductContext();
+  const { text, setText } = useProductContext();
 
-  // const { mutate: searchMutate } = useMutation(searchProduct, {
-  //   // onSuccess: refetch
-  // });
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      // searchMutate({ search: text });
-      refetch({ search: text });
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, [text]);
+  const debouncedChangeHandler = debounce(changeHandler, 1000);
 
   return (
     <div>
       <InputText
         type="text"
-        onChange={(e) => setText(e.target.value)}
+        onChange={debouncedChangeHandler}
         placeholder="type..."
       />
     </div>

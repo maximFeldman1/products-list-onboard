@@ -7,8 +7,6 @@ export class ProductController {
   static getAll(req: RestRequest, res: ResponseFunction, ctx: RestContext) {
     try {
       const searchText: string | null = req.url.searchParams.get("search");
-      console.log("after context", searchText);
-
       let filterProducts;
       if (searchText !== null) {
         filterProducts = products.filter((product) =>
@@ -17,8 +15,6 @@ export class ProductController {
       } else {
         filterProducts = products;
       }
-      console.log("filterProducts", filterProducts);
-      console.log("products", products);
 
       return res(ctx.status(200), ctx.json(filterProducts));
     } catch (err) {
