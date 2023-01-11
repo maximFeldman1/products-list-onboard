@@ -2,22 +2,27 @@ import React, { useCallback, useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { useProductContext } from "../../../context/contextProducts";
 import debounce from "lodash.debounce";
+import { useTranslation } from "react-i18next";
 
 export const SearchTable = () => {
   const { text, setText } = useProductContext();
+  const { t } = useTranslation();
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
-  };
+  const changeHandler = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setText(e.target.value);
+    },
+    []
+  );
 
-  const debouncedChangeHandler = debounce(changeHandler, 1000);
+  const onChangeHandler = debounce(changeHandler, 1000);
 
   return (
     <div>
       <InputText
         type="text"
-        onChange={debouncedChangeHandler}
-        placeholder="type..."
+        onChange={onChangeHandler}
+        placeholder={t("search.placeholder") || ""}
       />
     </div>
   );

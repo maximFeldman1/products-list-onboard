@@ -8,7 +8,7 @@ export class ProductController {
     try {
       const searchText: string | null = req.url.searchParams.get("search");
       let filterProducts;
-      if (searchText !== null) {
+      if (searchText) {
         filterProducts = products.filter((product) =>
           product.name.toLowerCase().includes(searchText?.toLowerCase())
         );

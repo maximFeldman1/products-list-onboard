@@ -14,7 +14,7 @@ interface IProps {
 export const ProductContext = createContext<IProps>({ products });
 
 export const ProductContextProvider = ({ children }: any) => {
-  const [text, setText] = useState<string | "">("");
+  const [text, setText] = useState<string>("");
 
   const { data: products, refetch } = useQuery({
     queryKey: ["text", text],
