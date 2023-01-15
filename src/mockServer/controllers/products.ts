@@ -6,7 +6,17 @@ import { IProduct } from "models";
 export class ProductController {
   static getAll(req: RestRequest, res: ResponseFunction, ctx: RestContext) {
     try {
-      return res(ctx.status(200), ctx.json(products));
+      const searchText: string | null = req.url.searchParams.get("search");
+      let filterProducts;
+      if (searchText) {
+        filterProducts = products.filter((product) =>
+          product.name.toLowerCase().includes(searchText?.toLowerCase())
+        );
+      } else {
+        filterProducts = products;
+      }
+
+      return res(ctx.status(200), ctx.json(filterProducts));
     } catch (err) {
       return res(
         ctx.status(400),

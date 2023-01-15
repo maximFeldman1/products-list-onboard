@@ -1,4 +1,3 @@
-import React, { useCallback, useState } from "react";
 import { useFormik } from "formik";
 import { ICreateProduct, IProduct } from "../../../../models";
 import styled from "styled-components";
@@ -53,10 +52,10 @@ export const ProductForm = ({
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
-        <h1 data-testid="form-title__title">{t("form.title")}</h1>
+        <h1 data-testid="form-title__title">{t("create.form.title")}</h1>
         <InputField
           data-testid="product-price__input"
-          name={t("form.input.price")}
+          name={t("create.form.input.price")}
           type="number"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -66,7 +65,7 @@ export const ProductForm = ({
         />
         <InputField
           data-testid="product-name__input"
-          name={t("form.input.name")}
+          name={t("create.form.input.name")}
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -75,7 +74,7 @@ export const ProductForm = ({
           required
         />
         <DropdownField
-          name={t("form.input.brand") || ""}
+          name={t("create.form.input.brand") || ""}
           value={formik.values.brand}
           options={["Nike", "Adidas", "Puma"]}
           onChange={formik.handleChange}
@@ -84,7 +83,7 @@ export const ProductForm = ({
         />
         <InputField
           data-testid="product-image__input"
-          name={t("form.input.image")}
+          name={t("create.form.input.image")}
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -98,14 +97,14 @@ export const ProductForm = ({
             type="submit"
             disabled={!isSubmit}
           >
-            {t("form.buttons.submit")}
+            {t("create.form.buttons.submit")}
           </Button>
           <Button
             className="ml-6"
             onClick={onCancel ? onCancel : onClickBack}
             type="button"
           >
-            {t("form.buttons.back")}
+            {t("create.form.buttons.back")}
           </Button>
         </WrapperBtn>
       </form>
